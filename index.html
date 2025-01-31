@@ -1,3 +1,5 @@
+<!-- BIG UPS TO  -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,32 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sixteen Square Inches of Map</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
 </head>
 <body>
-    <header class="sticky-header">
-        <div class="header-content">
-            <div class="header-title">evanapplegate.com</div>
-            <a href="#" class="back-to-top">Back to top</a>
-        </div>
+    <header>
+        <a href="https://evanapplegate.com" target="_blank">evanapplegate.com</a>
+        <a href="#" class="top">△ Back to top</a>
     </header>
     <div class="container">
         <div id="content"></div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const converter = new showdown.Converter({
-                tables: true,
-                strikethrough: true,
-                tasklists: true,
-                simplifiedAutoLink: true
+            const md = window.markdownit({
+                html: true,
+                linkify: true,
+                typographer: true,
+                breaks: true
             });
 
             fetch('map_course.md')
                 .then(response => response.text())
                 .then(text => {
                     console.log('Raw markdown:', text);
-                    const html = converter.makeHtml(text);
+                    const html = md.render(text);
                     console.log('Converted HTML:', html);
                     document.getElementById('content').innerHTML = html;
                 })

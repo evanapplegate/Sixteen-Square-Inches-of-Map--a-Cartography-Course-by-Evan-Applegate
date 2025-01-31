@@ -1,0 +1,11 @@
+# Ignore specific folders
+# Add the folder name followed by a forward slash
+logo/
+
+# System files
+.DS_Store
+*.log
+
+# IDE files
+.vscode/
+.idea/

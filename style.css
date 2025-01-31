@@ -1,6 +1,6 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    line-height: 1.6;
+    font-family: Optima, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
     color: #2C3E50;
     margin: 0;
     padding: 0;
@@ -12,102 +12,71 @@ body {
     image-rendering: pixelated;
 }
 
-.sticky-header {
+header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: #dccdbe;
-    z-index: 1000;
-    padding: 12px 0;
-}
-
-.header-content {
-    margin-left: 20px;
-    margin-right: 20px;
+    background: rgba(220, 205, 190, 0.8);
+    padding: 12px 20px;
+    border-bottom: 1px solid #b5a490;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-
-.header-title {
+    align-items: baseline;
     font-size: 1rem;
-    font-weight: 500;
+    line-height: 1;
+    z-index: 1000;
 }
 
-.back-to-top {
-    color: #2C3E50;
+header a {
     text-decoration: none;
-    font-size: 0.9rem;
 }
 
-.back-to-top:hover {
+header a:hover {
     text-decoration: underline;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 80px 20px 20px;
+    padding: 50px 20px 20px;
 }
 
-#toc {
-    margin: 2rem 0 4rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-#toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#toc a {
-    color: #2C3E50;
-    text-decoration: none;
-}
-
-#toc a:hover {
-    text-decoration: underline;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 1em;
-    margin-bottom: 1em;
+h1, h3, h4, h5, h6 {
     scroll-margin-top: 20px;
 }
 
 h1 { 
-    font-size: 2.5rem; 
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    line-height: 1.1;  
+    font-size: 2rem; 
+    line-height: 1.1;
+    margin: 1.5em 0 -.3em 0;
 }
 
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.5rem; }
+h2 { 
+    font-size: 1.2rem; 
+    line-height: 1.1;
+    margin: 0 0 -.3rem 0;
+}
 
 pre {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 4px;
-    overflow-x: auto;
-    margin: 1.5em 0;
+    background-color: #ede7df;
+    border-radius: 3px;
+    padding: 0.5em;
+    margin: 0.5em 0 1em 0;
 }
 
 code {
     font-family: Menlo, Consolas, Monaco, monospace;
     font-size: 0.9em;
+    background-color: #ede7df;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
 }
 
 img {
     max-width: 100%;
     height: auto;
-    margin: 1.5em 0;
+    margin: 1em 0 1.5em 0;
     border-radius: 4px;
 }
 
@@ -115,6 +84,7 @@ table {
     width: 100%;
     margin: 1.5em 0;
     border-collapse: collapse;
+    table-layout: fixed; /* This ensures equal column widths */
 }
 
 th, td {
@@ -122,18 +92,13 @@ th, td {
     border: none;
     border-bottom: 1px solid #6E5950;
     text-align: left;
+    vertical-align: top; /* This aligns text to the top */
+    width: 50%; /* This ensures each column takes up exactly half the table width */
 }
 
 th {
     border-bottom: 2px solid #6E5950;
     font-weight: 600;
-}
-
-blockquote {
-    margin: 1.5em 0;
-    padding: 0.5em 1em;
-    border-left: 4px solid #6E5950;
-    background: #f8f9fa;
 }
 
 /* Add space for anchor links to account for fixed header */
@@ -149,17 +114,53 @@ a:visited {
     color: #6E5950;
 }
 
+/* Fix list item paragraph spacing */
+li p {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 15px;
         font-size: 16px;
     }
 
-    #toc ul {
-        flex-direction: column;
+    h1 { font-size: 2rem; }
+    h3 { font-size: 1rem; }
+
+    /* Mobile table styles */
+    table {
+        font-size: 14px; /* Slightly smaller text on mobile */
     }
 
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.25rem; }
+    th, td {
+        padding: 6px 8px 6px 0; /* Reduced padding */
+        word-break: break-word; /* Allow long words to break */
+        hyphens: auto; /* Enable hyphenation */
+    }
+
+    /* Handle tables with long URLs better on mobile */
+    td a {
+        word-break: break-all; /* Break URLs at any character */
+    }
+}
+
+/* For very small screens, stack the table cells */
+@media (max-width: 480px) {
+    table {
+        table-layout: auto; /* Allow table to adjust based on content */
+    }
+
+    th, td {
+        display: block;
+        width: 100%;
+        padding: 6px 0;
+    }
+
+    /* Hide empty cells */
+    td:empty {
+        display: none;
+    }
 }
