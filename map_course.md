@@ -32,17 +32,16 @@ _A practical course for those who want to use the computer to make nice maps._
 - [Read me last](#read-me-last)
 
 # Read me first <a id="read-me-first"></a>
-Comfortable fighting with the computer and typing into something called an "Integrated Development Environment?"
+The most beautiful maps are not behind us: they will be made today, by people who cared enough to make them. That sounds like you.
 
-Tolerate lots of trials?
-
-Have any graphic design/illustration talent? 
-
-Want to make beautiful maps?
+Speaking of you, are you:
+- Comfortable fighting with the computer and typing into something called an "Integrated Development Environment?"
+- Okay with dozens of trials ’til you get a good result?
+- Any good at design or illustration?
 
 If yes: you can read this guide and use mostly-free tools to make a very nice 4x4" map. The size of a coaster. If you can make a real nice small map, you can make a real nice map of any size.
 
-Caveat: these are idiosyncratic notes on how I, Evan Applegate, n=1 computer-based cartographer, makes 51st percentile maps. And I didn't learn cartography from a web site; I shared a desk with expert cartographer [Daniel Huffman](https://somethingaboutmaps.com) for ~18 months and asked hundreds of questions. So if you can swing it: apprentice yourself.
+Caveat: these are idiosyncratic notes on how I, Evan Applegate, n=1 computer-based cartographer, makes 51st percentile maps. I didn't learn cartography from a web site; I shared a desk with expert cartographer [Daniel Huffman](https://somethingaboutmaps.com) for ~18 months and asked hundreds of questions. So if you can swing it: apprentice yourself.
 
 # Step 0: Software <a id="step-0"></a>
 This is the only section that has both Windows and OSX instructions; I use OSX so everything after this will be for OSX only.
@@ -51,10 +50,19 @@ This is the only section that has both Windows and OSX instructions; I use OSX s
 
 QGIS is a free, open-source program that lets you manipulate geospatial data and create PDF/SVG exports you can later cute up in design software. Visit https://qgis.org/download/ and follow the instructions for your operating system.
 
+After installation add the following plugins via Plugins > Manage and Install Plugins > 
+- Globe Builder
+- GRASS GIS Processing Provider
+- MetaSearch Catalog Client
+- QuickMapServices
+- QuickOSM
+- Relief Visualization Toolbox
+- Terrain Shading
+
 ## Design software
 - Inkscape/Illustrator: I work in Adobe Illustrator, but Inkscape works if you'd prefer a free vector design software ([Alex McPhee](https://pronghornmaps.com/) swears by it): https://inkscape.org/
-- GIMP/Photoshop: same idea for AdobePhotoshop, GIMP is free https://www.gimp.org/downloads/
-- Some also use Affinity Designer; I never have.
+- GIMP/Photoshop: same idea for Adobe Photoshop, GIMP is free https://www.gimp.org/downloads/
+- Some also use Affinity Designer, I never have, YMMV.
 
 ## Other software 
 - Eduard: OSX only, great for making imitations of hand-drawn hillshades. You feed it your own elevation data or use the built-in downloader: https://eduard.earth/
@@ -125,7 +133,7 @@ Cartography often requires processing gigabytes of vector and raster data, e.g. 
 
 E.g. "read every .tif in this folder, extract bands 4, 3, 2 from each, write to a new .tif for each one" and it will write a python script, or "write a gdal command to reproject input.tif, in EPSG:4326, to EPSG:3339 while adding LZW compression and using the cubic resampling method" and you get a command to paste into your terminal.
 
-__As of 1/2025 I use Codeium’s Windsurf  https://codeium.com/, the Cascade feature + Claude 3.5 Sonnet allows the LLM read/write files and run terminal commands. This eliminates an enormous amount of copy/pasting. Ask Cascade to stick together 5 terabyte datasets, run through thousands of files, do anything your data-heart can imagine: you’ve hired an intermediate programmer with infinite patience for $20/mo.__
+__As of 1/2025 I use Codeium’s Windsurf https://codeium.com/, the Cascade feature + Claude 3.5 Sonnet allows the LLM to read/write files and run terminal commands. This saves you an enormous amount of copy/pasting. Ask Cascade to stick together 5 terabyte datasets, run through thousands of files, do anything your data-heart can imagine: you’ve hired an intermediate programmer with infinite patience for $20/mo.__
 
 Windows terminal commands
 
@@ -194,7 +202,7 @@ Mac/Linux terminal commands
 
 			too many? research tools > select by location > first box is the GNIS point layer youre gonna cut donw, second box is the bounding box you made in the beginning > run, it'll select all the points > right click the GNIS point layer > export > save features as > tick save only selected features > change CRS to EPsG:26943 > format: ESRI shapefile (this doesnt really matter, geojson is just kinda slow for me)
 
-			it'll give you all these categoreis, you dont need all of these on one map generally; making a physical geog map? keep the channels, points, bays, islands etc, ditch civil, military, etc
+			it'll give you all these categories, you dont need all of these on one map generally; making a physical geog map? keep the channels, points, bays, islands etc, ditch civil, military, etc
 
 			census you can safely ditch
 
@@ -310,8 +318,7 @@ Mac/Linux terminal commands
 
 		now you have all roads on discrete layers
 
-
-			- 1.3.4 Airport points, polys (OSM)
+		- 1.3.4 Airport points, polys (OSM)
 		- 1.3.5 Neighborhoods (gazzetteer? airbnb zillow?)
 		- 1.3.6 Nature (OSM, parks, etc)
 		- 1.3.7 Admin divs (US only)
@@ -502,9 +509,7 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 			Polygons with interior faded glows: black fill, feather effect, opacity 0% above ANOTHER fill with the color you like. might need knockout group enabled too
 			- Coast lines (adjustment panel)
 			Making vintage-style coast lines in Illustrator: to your coastline path add a series of strokes in the appearance panel, each gets an offset path effect. Increase the offset path distance between each stroke so they spread out as they get further from the coast.
-
 			This is a last step as it makes Illustrator very slow; I save the appearance as a graphic style and apply it when I'm ready to export.
-
 			- Generalization
 				Cut down voids/gaps in your parks layers manually, makes a cleaner output. mapshaper.org is good for this too if you jstu want fewer vertices
 		- Metadata
@@ -514,27 +519,20 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 		- Adjustment layers
 		- Land cover
 		NLCD WMTS layer > cropped TIF > PS > re-paste into discrete classes > change colors, add patterns from my old LC.psb > steal colors from henrik, churchill, old USGS > use end-at-land topobathy DEM to mask land and add topobathy gradient
-
 		NLCD to vector:
 		If you want e.g. wetlands, use the QGIS raster calculator to get classes 91 and 92, "woody wetlands" and "emergent herbaceous wetlands," into their own TIFF. raster calc > ("NLCD land cover@1" = 91) OR ("NLCD land cover@2" = 92)
-
 		Use QGIS polygonize to turn those classes into polygons
 		Delete polygons where DN = 0, those are the ones we dont want
 		Exported to SVG
-
 		Place polygons in Illustrator, offset path to expand them, make everything into a compound path, use that compound path as a mask over a pattern of marsh symbols. I never have any luck at making repeating patterns so I just copy/pasted a bunch of little marsh marks.
-
-		Can also use the built-in pattern swatches; Swatches > Open Swatch Library> Patterns > Basic Graphics > Basic Graphics_Textures, I like "USGS 17 Dry Sandy Lake." otehrs are nice too
-
-			- Color schemes
-			- Ice
-			- Patterns
-		- Elevation
-			- Relief layer order
-			- The futz...
-			- Imagery drape
-- Appendix
-	- Learn from these tutorials
+		Can also use the built-in pattern swatches; Swatches > Open Swatch Library> Patterns > Basic Graphics > Basic Graphics_Textures, I like "USGS 17 Dry Sandy Lake." otehrs are nice too.
+	- Color schemes
+	- Ice
+	- Patterns
+- Elevation
+	- Relief layer order
+	- The futz...
+	- Imagery drape
 
 # Resources <a id="resources"></a>
 
@@ -557,7 +555,6 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 | [Margaret Pearce](https://www.studio1to1.net/about) | [Henrik Johansson](https://hkartor.se/) |
 | [Mike Hall](https://www.thisismikehall.com/) | [Carl Churchill](http://www.churchillgeo.com/) |
 | [Daniel Huffman](https://somethingaboutmaps.com) | [Bellerby & Co.](https://bellerbyandco.com/) |
-| [Sarah Bell](https://www.sarahbellmaps.com/drawing-color-hillshade-a-tutorial-with-time-lapse-videos/) | |
 
 |   Map collections    |     |
 |:--------------------------|:--------------------------|
@@ -622,11 +619,12 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 | [Inkscape](https://inkscape.org/) | [GIMP](https://www.gimp.org/downloads/) |
 | [MAPublisher](https://www.avenza.com/mapublisher/) | [Excel geocoder, just need a free Bing API key](http://excelgeocodingtool.com/) |
 | [Projection Wizard (helps you pick a projection for your map's area)](https://projectionwizard.org/) | [Mapshapher: drop in unprojected/WGS84/EPSG:4326 vector data, it will strip out 99% of the points you don't need](https://mapshaper.org) |
+| [GDAL/OGR cheat sheet](https://github.com/dwtkns/gdal-cheat-sheet) | |
 
 |   Resource pages    |     |
 |:--------------------------|:--------------------------|
 | [By Maptime](http://maptime.io/lessons-resources/) | [By Robin Tolochko](https://github.com/tolomaps/resources#general-mapping-stuff) |
-| [GDAL/OGR cheat sheet](https://github.com/dwtkns/gdal-cheat-sheet) | [By RT Wilson](https://freegisdata.rtwilson.com/#home) |
+| [Harry Kuril’s list of cartography sites](https://docs.google.com/spreadsheets/d/1kKIZxGNNjY4K_07fKHmxunzoruju6gODeWaD5IUe9Wc/edit?gid=1825267729#gid=1825267729) | [By RT Wilson](https://freegisdata.rtwilson.com/#home) |
 
 |   Misc.   |     |
 |:--------------------------|:--------------------------|
@@ -667,3 +665,34 @@ My map workflow, you’ll find yours soon enough:
 2. Thin out, clean, futz with that data in QGIS, GDAL (I ask Claude 3.5 to write the commands and scripts). Modern start-with-pile-of-data carto is about knowing what to leave off the map, so you’ll spend a lot of time sifting tangles of data for what you actually want to show.
 3. Make the remaining data look nice in Illustrator and Photoshop.
 4. Embellish: hire illustrators, letterers, other artists.  Art direction tip: don't ask an artist to work outside their wheelhouse. Also I don't revise something to death, if the work-for-hire is not what I envisioned, I say "Thanks!", pay the last half and find someone else.
+
+_Why I wrote this_
+I want to see another [Turgot map](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~287244~90059510:Composite--Paris--Plan-de-Turgot) before I die. I want my grandkids to cherish a map made in the 2030s. I want my favorite material culture to live on.
+
+_The problem_ 
+The worst map of 1890 looks better than 99% of today’s maps. In 1910 you could buy a 50-cent rail route pamphlet that looks better than any map you can buy today. This sucks, but it could not be otherwise; consider who makes today’s maps:
+
+- Atlas cartographers: mostly gone, those who remain can’t pick colors.
+- GIS managers: their job is to manage the sewer pipe/streetlamp database and make maps for 8.5x11"  PDFs, can’t design or don’t have time.
+- Editorial/news cartographers: under tight deadlines, editors don’t care, art directors don’t discourage nice maps but they also don’t know how to shape or commission them.
+- Government cartographers: almost all GIS managers, the maps just gotta reflect the database, nobody cares how they look.
+- Nonprofit cartographers: too busy with GIS tasks, boss doesn’t care about nice maps.
+- Big tech cartographers: Google/Apple’s maps are database outputs, too constrained by people poking at the map to make them look nice.
+- Academic/critical cartographers: not rewarded for making nice maps, rewarded for writing recondite PDFs _about_ maps.
+- Capital A Artists: too into deconstruction to make a sincere attempt.
+- Biz intelligence cartographers: who’s gonna cherish a bunch of hex bins?
+
+The only good cartographers are illustrators. In an illustrator's map, gestalt and composition come first. Crucially, they don’t just affirm software’s idea of how a map should look.
+
+_The Solution_
+Every beautiful high-production map you'd see in a repository can be made today, maybe better. They had "time, strength, cash, patience," but while attenuated, those things are still around; some patron could pay an illustrator to walk around a city for years and draw every building he saw, like the [Prévôt des Marchands of Paris did in 1734](https://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~287244~90059510:Composite--Paris--Plan-de-Turgot).
+
+The bad news is there is no living memory of this stuff, no old hands to teach how rich maps were constructed. We start from scratch. The good news: we know exactly what to aim for. A time and money problem sounds tractable to me.
+
+There’s no building you can walk into where someone will grab you by both ears and teach you how to make a beautiful map. Formal cartography education does not exist in the US; I have a (free) M.S. in cartography and most of the looks-nice mapmaking I did was extracurricular.
+
+Today’s talented anglophone mapmakers, and there are many, taught themselves. They are the only ones taking this seriously; the autodidacts are my favorite. I just wish you didn’t have to be a five-star autodidact to make nice maps.
+
+If I really had my druthers I'd solve this with ~$15 million, property, and professional instruction: make more mapmakers by apprenticeship. I learned mapmaking by close-range apprenticeship; so, a school with a 1:1 instructor ratio. If you've got the building, I have the staff. Call me.
+
+![images look like this](/best_maps_still_to_come.gif)
