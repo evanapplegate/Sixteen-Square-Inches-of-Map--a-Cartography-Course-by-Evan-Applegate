@@ -13,7 +13,6 @@ _A practical course for those who want to use the computer to make nice maps._
 		- Always grid
 		- Always walk
 		- Download the sample data package and how-to video library
-			- $1,000 one-time cost, updates regularly; you get a link to grab 50 gigs of well-organized design files. These you can steal, hew to, whatever. Do better (please!)
 	- Gestalt
 	- Color
 	- Type
@@ -394,6 +393,57 @@ Mac/Linux terminal commands
 				https://opensourceoptions.com/how-to-create-contour-lines-and-labels-with-qgis/
 				only thing id add: placement > general settings > mode: curved
 				note: this breaks up your text paths. QGIS SVG export doesnt understand type on a path
+
+
+You’ll encounter dozens of arcane file types but here are the main ones to look out for. All of these get worked over in QGIS and GDAL.
+
+.SHP – Shapefile – stores vector shapes + associated data. Imagine you drew a hexagon and saved it as a vector file, but didn’t stop there: you also attached a table to that shape listing the hexagon’s name, when you drew it, its size in square meters, etc.
+.GEOJSON – GeoJSON – also stores vector shapes + data tables.
+.TIFF – GeoTIFF –stores raster data like satellite images, terrain data. Like a regular TIFF except it comes with georeferencing that tells QGIS where on earth to place it.
+.GDB –GeoDatabase – Stores vector shapes + data too.
+Where to get geographic data
+
+Countries, Lakes, Rivers – Natural Earth supplies geographic boundaries and features; for a quick overview download the quick start kit, open the .QGS file in QGIS and see how it looks. Not great? Well, thats where you come in.
+
+Roads – Natural Earth has roads, but not all of them. If you want to make a road map of your city, use OpenStreetMap data downloaded via the BBBike.org site. You zoom to where you want some data, draw a box, give it your email and it’ll send you a shapefile that you can view in QGIS.
+
+Land cover (is that part of earth a forest? A town? A desert?) – Want to show what’s down there? If your map shows a big chunk of the world, 300-meter resolution Globcover 2009 data should work; find “A coloured version of the map in GeoTIFF format” on that page to get a file you can tune up in QGIS and Photoshop. For North America the Commission for Environmental Cooperation has a detailed 30-meter resolution dataset.
+
+Terrain – the hills and valleys, a.k.a “shaded relief” or “hillshade.” This used to be drawn with graphite and airbrushes, now you turn satellite altimetry data into little computer-generated landscapes. You can get pre-generated terrain from Natural Earth: for zoomed-in maps, for zoomed-out maps, for just the U.S..
+
+You can also roll your own terrain by grabbing elevation data for your map area from the Open Terrain Project and making your own (see step ❸).
+
+Bathymetry (underwater terrain) – If your map includes undersea terrain, use the GMRT map tool to download data. Pick the rectangle tool at the top > drag a rectangle for your area > “create grid file”, file format: geotiff, mask: unmasked, grid resolution: maximum > download grid. You can process this into contours or a hillshade in step ❸.
+Need something else? Time to start sifting the resources page down there ▼.
+
+❸ Design your map
+
+So now you have QGIS and GDAL installed, plus a folder full of geographic data. How do you turn that into a map? Someday you’ll get an end-to-end account (it’d take like 30,000 words and good screencasts) but for now you join the grand tradition of “follow a tutorial (check the resources pile at the bottom of this page ▼), ask your computer pals at The Spatial Community for help when you get stuck.”
+
+Reproject your data
+
+Whatever coordinate system you project your data into, you gotta apply that same projection to all the other data in your map. It’s all gotta match!
+
+Vector data is easy to reproject in QGIS. Raster stuff like imagery and elevation data is a bit more involved:
+
+You can get into the weeds on picking a map projection, since you’re on the leaves of the old math problem of how to represent 3D stuff on a 2D plane. Luckily nobody’s navigating by your map, so just pick a projection that looks nice. Draw out a box enclosing your area of interest on projectionwizard.org and see if any of those look good. Or just default to Universal Transverse Mercator (UTM), nobody complains about that one.
+Get a projection you like? Copy the PROJ string from projection wizard or look up your UTM zone’s EPSG code on EPSG.io 
+Feed that string or EPSG code into GDAL to change the projection of your data. You can also change projections in QGIS. 
+Make the terrain
+
+My favorite part of maps is the topography. Make your own in QGIS or...
+Try it in GDAL. The command line is a bit painful to learn at first but it will be much faster; making nice terrain requires a lot of experimentation, so you’ll need that speed.
+If you want very nice terrain, make it in a 3D-modeling program (Blender). It’s free and not that hard if you follow the instructions carefully. 
+Eduard turns your DEMs into a looks-like-an-Imhof-graphite-relief (ML......wow)
+PLEASE draw your own terrain: Sarah Bell wrote two tutorials on how to render shaded reliefs in pencil.
+Design time
+
+Once your data’s cleaned up and you’re left with what you want to show on your map, you export an SVG/PDF out of QGIS and make your vectors look nice in Illustrator or Inkscape. For the rasters (e.g. terrain and satellite imagery) export a TIFF from QGIS/GDAL and edit them in Photoshop or GIMP. There are tools that make this more convenient, like the wildly expensive MAPublisher plugin for Illustrator, but they’re not necessary.
+
+Find some maps you like and see how close you can get; I think of ’tography as more craft than art, so you can get real far by copying the masters. Raid the inspo column down there ▼.
+
+Now you’re in the art zone: compositing in Illustrator, labeling, futzing with colors, upsetting back-tracks to your original geodata, adding cute ephemera like north arrows and legends, illustrations. Make it look nice. Real nice. I can’t wait to see your map ♡.
+
 
 - 2. Map Design
 	- Naked theft: NPS etc
