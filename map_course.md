@@ -136,7 +136,7 @@ E.g. "read every .tif in this folder, extract bands 4, 3, 2 from each, write to 
 
 __As of 1/2025 I use Codeium’s Windsurf https://codeium.com/, the Cascade feature + Claude 3.5 Sonnet allows the LLM to read/write files and run terminal commands. This saves you an enormous amount of copy/pasting. Ask Cascade to stick together 5 terabyte datasets, run through thousands of files, do anything your data-heart can imagine: you’ve hired an intermediate programmer with infinite patience for $20/mo.__
 
-Windows terminal commands
+Windows terminal commands, big ups to [Spatial Thoughts for the table](https://spatialthoughts.com/courses/mastering-gdal-tools/)
 
 |   Command    | Description                     | Example    |
 |:-----------------|:------------------------------------|:---------------------|
@@ -158,7 +158,6 @@ Mac/Linux terminal commands
 | `rm `            | Delete a file                       | `rm test.txt` |
 | `rm -R`          | Delete a directory                  | `rm -R test` |
 | `mkdir`          | Create a directory                  | `mkdir test` |
-
 
 - 1. Map data
     - 1.x Projections 101 (very basics (since i dont know much beyond that)
