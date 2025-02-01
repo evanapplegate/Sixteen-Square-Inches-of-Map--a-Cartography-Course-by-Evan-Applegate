@@ -1,4 +1,4 @@
-![images look like this](/header2.gif)
+![images look like this](/site_images/header.gif)
 _A practical course for those who want to use the computer to make nice maps._
 
 - [Read me first](#read-me-first)
@@ -7,8 +7,9 @@ _A practical course for those who want to use the computer to make nice maps._
 	- The basics of geospatial data
 	- Data sources
 	- Data processing
-- Step 3: Map design
-	- Rules for good maps
+- [Step 2: Filtering map data](#step-2)
+- [Step 3: Map design](#step-3)
+	- Three rules for good maps
 		- Always steal
 		- Always grid
 		- Always walk
@@ -389,17 +390,6 @@ Mac/Linux terminal commands
 			- Vector
 				- Spatial queries
 				- Attribute-table queries
-				- Contours
-				check DEM units
-				-i is the interval; so -i 20 on a meter-unit DEM means your contours will have 20m intervals
-				```gdal_contour -a ELEV -i 40 -f "ESRI Shapefile" in1.tif "out_1"```
-				I recommend using this script by Henrik https://hkartor.se/anteckningar/contour_lines_script.html
-				I modded it to change the -ot to Float32 so I can use it for underwater bathy
-				if you want contour polygons stedda lines use `-p -amin "min_elev" -amax "max_elev"` stedda `-a ELEV`
-				to label contours
-				https://opensourceoptions.com/how-to-create-contour-lines-and-labels-with-qgis/
-				only thing id add: placement > general settings > mode: curved
-				note: this breaks up your text paths. QGIS SVG export doesnt understand type on a path
 
 
 You’ll encounter dozens of arcane file types but here are the main ones to look out for. All of these get worked over in QGIS and GDAL.
@@ -423,9 +413,7 @@ You can also roll your own terrain by grabbing elevation data for your map area 
 Bathymetry (underwater terrain) – If your map includes undersea terrain, use the GMRT map tool to download data. Pick the rectangle tool at the top > drag a rectangle for your area > “create grid file”, file format: geotiff, mask: unmasked, grid resolution: maximum > download grid. You can process this into contours or a hillshade in step ❸.
 Need something else? Time to start sifting the resources page down there ▼.
 
-❸ Design your map
 
-So now you have QGIS and GDAL installed, plus a folder full of geographic data. How do you turn that into a map? Someday you’ll get an end-to-end account (it’d take like 30,000 words and good screencasts) but for now you join the grand tradition of “follow a tutorial (check the resources pile at the bottom of this page ▼), ask your computer pals at The Spatial Community for help when you get stuck.”
 
 Reproject your data
 
@@ -438,26 +426,99 @@ Get a projection you like? Copy the PROJ string from projection wizard or look u
 Feed that string or EPSG code into GDAL to change the projection of your data. You can also change projections in QGIS. 
 Make the terrain
 
-My favorite part of maps is the topography. Make your own in QGIS or...
-Try it in GDAL. The command line is a bit painful to learn at first but it will be much faster; making nice terrain requires a lot of experimentation, so you’ll need that speed.
-If you want very nice terrain, make it in a 3D-modeling program (Blender). It’s free and not that hard if you follow the instructions carefully. 
-Eduard turns your DEMs into a looks-like-an-Imhof-graphite-relief (ML......wow)
-PLEASE draw your own terrain: Sarah Bell wrote two tutorials on how to render shaded reliefs in pencil.
-Design time
+# Step 3: Map design <a id="step-3"></a>
+
+Time for the most time-consuming part of mapmaking: designing the map. Let’s get aesthetic.
+
+## Three rules for good maps
+### 1. Always grid
+![Grid atop a 3x5 ft. world map](/course_images/always_grid.gif)
+_Grid atop a 3x5 ft. world map_
+
+If you want a good map, you need to run your eyes (and cursor) over every square millimeter of your fictive territory. Were you drawing a map on paper you wouldn't need proof of "I looked at the whole thing" because you had to make every mark yourself. For computer-mediated maps, in which the computer makes the marks for you, you have to demonstrate that you care about the map by going over every part.
+
+Fastidiousness is what separates a tossed-off computer output from a real nice map. A great cartographer is naturally fastidious; that's not me. So to force myself to be fastidious I lay a grid over the map in Illustrator and, before declaring the map finished, look at only one grid cell at a time. You're checking for:
+
+- Text running into text
+- Text running into line/points/shapes
+- POIs in the wrong place
+- Typos
+- Overflowing text boxes
+
+You fix all of those in a grid cell, tick it off, then move on to the next. "Simple but not easy," this might take a lot of time.
+
+### 2. Always steal
+![National Park Service Illustrator file](/course_images/always_steal.gif)
+_A National Park Service Illustrator file; hewing to this will make you an 80th percentile cartographer._
+
+_"Good [mapmakers] copy, great [mapmakers] steal."_ The referent to which the word "map" is stuck = a thousand-year-old cultural artifact that people trust; people are primed to appreciate and enjoy maps because past cartographers did a great job aesthetically.
+
+Unless you're a 99.9th percentile genius, cartographic innovation is not for you. Hew to what what better mapmakers did.
+
+Luckily it's never been easier to stand on the shoulders of giants:  master cartographer Tom Patterson ensured that the public-domain map designs created by NPS would be made available to the public. You search up a park, find the map page, and download the "Adobe print production ZIP file." Here's one for [Yosemite National Park](https://www.nps.gov/media/photo/collection-item.htm?pg=7347320&cid=305fb7af-a71b-469b-941e-a98b439c882f&id=c51f64fd-51dc-400e-b562-d02789c95933&sid=1e843023-c4e1-4edb-96be-6444f5fc3468&p=1&sort=), and [here’s a ZIP with a sample NPS map, layout, symbology, the works.](/other_data/NPS_templates.zip)
+
+### 3. Always walk
+Maps are about territories; if possible, get out there.
+
+## Terrain representation: shaded relief
+
+The general steps are grab DEM > crop to your area > reproject > feed to whatever makes your shaded relief > take your shaded relief and composite it
+
+### In QGIS
+Processing
+The "Terrain Shading" Toolbox
+Relief Visualization Toolbox > anisotropic sky-view factor >  64 search directions and watch z factor
+
+### In Eduard
+Feed it a DEM, get a sweet manual-style shaded relief
+
+### In Blender
+Open source 3D program Blender an annoying to use for a newbie but can make real nice landscapes, user notes:
+
+- fn + f3 to open the command search window
+- ` tilde to get the option-wheel
+- When in camera view: command + ` to freely point camera
+- Change camera to vertical with render LxW dimensions
+- The lil square on the right controls the dimensions and placement of stuff in XYZ
+- Only sun rotation matters for lighting, increase angle to soften shadows
+- Add HDRI files to simplify sunsetty lighting; https://polyhaven.com/hdris/skies/sunrise-sunset > select surface > click world property (lil red globe) > color > environment texture > open > browse to .exr file > shows up on render or render preview
+- Camera > clip end set this to something high
+- GIS > import > look at options on the right to pick DEM + sat image options
+- Preferences > input > simulate numpad
+- Under modifiers > DEM> where it says "catmull clark simple" crank levels and render past 6 (you gotta type it) and render to 11 to make it divide finer
+- Exaggerate z: orange square > crank up Z factor
+
+Tutorials:
+- https://www.youtube.com/watch?v=Mj7Z1P2hUWk
+- https://www.youtube.com/watch?v=PmHxBn7F9Fw
+- https://www.youtube.com/watch?v=IcL7N335oCk
+- https://wanderingcartographer.wordpress.com/2014/11/14/shaded-relief-with-blendergis-part-1/
+- https://github.com/domlysz/BlenderGIS/wiki/Basemaps
+
+## Terrain representation: contours
+You can do this pointy-clicky in QGIS or use GDAL; I'd load up Windsurf Cascade and ask it to write GDAL commands, you can iterate much faster. GDAL command > open output in QGIS > repeat til they look nice.
+
+```gdal_contour -a ELEV -i 40 -f "ESRI Shapefile" in1.tif "out_1"```
+
+check DEM units
+-i is the interval; so -i 20 on a meter-unit DEM means your contours will have 20m intervals
+
+I recommend using this script by Henrik https://hkartor.se/anteckningar/contour_lines_script.html
+I modded it to change the -ot to Float32 so I can use it for underwater bathy
+if you want contour polygons stedda lines use `-p -amin "min_elev" -amax "max_elev"` stedda `-a ELEV`
+to label contours
+https://opensourceoptions.com/how-to-create-contour-lines-and-labels-with-qgis/
+only thing id add: placement > general settings > mode: curved
+note: this breaks up your text paths. QGIS SVG export doesnt understand type on a path
+
+
+## Compositing in Illustrator
 
 Once your data’s cleaned up and you’re left with what you want to show on your map, you export an SVG/PDF out of QGIS and make your vectors look nice in Illustrator or Inkscape. For the rasters (e.g. terrain and satellite imagery) export a TIFF from QGIS/GDAL and edit them in Photoshop or GIMP. There are tools that make this more convenient, like the wildly expensive MAPublisher plugin for Illustrator, but they’re not necessary.
 
 Find some maps you like and see how close you can get; I think of ’tography as more craft than art, so you can get real far by copying the masters. Raid the inspo column down there ▼.
 
 Now you’re in the art zone: compositing in Illustrator, labeling, futzing with colors, upsetting back-tracks to your original geodata, adding cute ephemera like north arrows and legends, illustrations. Make it look nice. Real nice. I can’t wait to see your map ♡.
-
-
-- 2. Map Design
-	- Naked theft: NPS etc
-		- Choose a state, choose a park, get an Illustrator version of that map: https://www.nps.gov/carto/app/#!/parks
-		- Metadata: https://www.nps.gov/carto/app/#!/maps/production-tips
-		- .AIT templates towards the top, broken links but if you paste them into the archive.org waybackmachine they download fine: https://www.nps.gov/carto/app/#!/maps/starter-maps , e.g. https://web.archive.org/web/20170605123357/https://www.nps.gov/hfc/carto/starter-maps/a_starter.zip
-
 
 - 2.1 Setup
 		- Layers
@@ -694,5 +755,3 @@ There’s no building you can walk into where someone will grab you by both ears
 Today’s talented anglophone mapmakers, and there are many, taught themselves. They are the only ones taking this seriously; the autodidacts are my favorite. I just wish you didn’t have to be a five-star autodidact to make nice maps.
 
 If I really had my druthers I'd solve this with ~$15 million, property, and professional instruction: make more mapmakers by apprenticeship. I learned mapmaking by close-range apprenticeship; so, a school with a 1:1 instructor ratio. If you've got the building, I have the staff. Call me.
-
-![images look like this](/best_maps_still_to_come.gif)
