@@ -1,13 +1,17 @@
+<!-- Basic flow: a graphic designer, prospects annihilated by AI, can learn to make nice maps in open source GIS software + adobe. No videos, lots of GIFs. Everything you need is on this HTML page; public domain'd source code in https://github.com/evanapplegate/Sixteen-Square-Inches-of-Map--a-Cartography-Course-by-Evan-Applegate -->
+
 ![images look like this](/site_images/header.gif)
 _A practical course for those who want to use the computer to make nice maps._
+_This is a work in progress; submit comments [via LinkedIn](https://www.linkedin.com/in/evan-applegate/) or info@quercusmaps.com_
 
+- [Resources](#resources)
 - [Read me first](#read-me-first)
 - [Step 0: Software](#step-0)
-- [Step 1: Gathering map data](#step-1)
+- Step 1: Gathering map data
 	- The basics of geospatial data
 	- Data sources
 	- Data processing
-- [Step 2: Filtering map data](#step-2)
+- Step 2: Filtering map data
 - [Step 3: Map design](#step-3)
 	- Three rules for good maps
 		- Always steal
@@ -67,7 +71,7 @@ After installation add the following plugins via Plugins > Manage and Install Pl
 
 ## Other software 
 - Eduard: OSX only, great for making imitations of hand-drawn hillshades. You feed it your own elevation data or use the built-in downloader: https://eduard.earth/
-- MAPublisher: an Illustrator plug-in that lets you directly import, manipulate and catalog geospatial data. If you make a lot of maps it is very useful (I use it all day) but I wouldn't pitch it for novices, it costs $3k: https://www.avenza.com/mapublisher/
+- MAPublisher: an Illustrator plug-in that lets you directly import, manipulate and catalog geospatial data. If you make a lot of maps it is very useful (I use it all day) but I wouldn't pitch it for novices, it costs $3k, if you actually like making a lot of maps in Illustrator, buy it immediately: https://www.avenza.com/mapublisher/
 
 ## Command line software
 If you're a pointy-clicky kind of computer user, this will seem unfamiliar but you'll come to appreciate the speed advantage over clicking. Also you'll mostly be using only three commands: ```cd``` to change folders, ```cd ..``` to move a level up in your file tree, and ```dir``` or ```ls``` to list all files in the current folder.
@@ -166,15 +170,17 @@ Mac/Linux terminal commands
     	- What you have to remember: you gotta get all your data into the same coordinate reference system (CRS). Rasters, vectors, all of it.
     - Scale
     	- What are you trying to show?
-    	- Large-scale: zoomed-in, smaller denominator
-    	- Small-scale: zoomed-out, larger denominator
+    	- Zoomed in/zoomed out?
 	- 1.x Gather raster data, diff between vector and raster
 		- 1.x.x Harvesting from ESRI stuff
 			- ESRI's got a dozen nouns for "data pipe for vector and raster geodata," there's Feature Services, Feature Layers, Map Services, Tile Services, Image Services, Scene Services, Geoprocessing Services, Network Services, Web Map Services, Web Feature Services, Web Map Tile Service, Web Coverage Service, Hosted Layers, Stream Services, Locator Services, Data Stores. I have no idea what these nouns are, can't find a bestiary, you are on your own.
+			- Harvesting from REST Servers
+			- Joseph Elfelt's GIS list
 		- 1.x.x Elevation data: collected by lidar/radar, basic concept
+			- Terrain necessity
 			- USGS sources
 			- OpenTopography
-			- Viewfinder panoramas
+			- Viewfinder panoramas: filtered DEMs
 			- Eduard
 			- Undersea data
 				- GEBCO
@@ -189,6 +195,7 @@ Mac/Linux terminal commands
 			- ESA sentinel explorer
 			- USGS methods
 			- QGIS method
+			- Google Earth Engine
 	- 1.3 Gather vector data
 		- 1.x.x Toponymy (GNIS, gazzetteer, etc)
 			Easiest way to get stuff for the US: https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names , tick visible in current extent, query, click download>arrow
@@ -452,7 +459,7 @@ _A National Park Service Illustrator file; hewing to this will make you an 80th 
 
 _"Good [mapmakers] copy, great [mapmakers] steal."_ The referent to which the word "map" is stuck = a thousand-year-old cultural artifact that people trust; people are primed to appreciate and enjoy maps because past cartographers did a great job aesthetically.
 
-Unless you're a 99.9th percentile genius, cartographic innovation is not for you. Hew to what what better mapmakers did.
+Unless you're a 99.9th percentile genius, cartographic innovation is not for you. Hew to what better mapmakers did.
 
 Luckily it's never been easier to stand on the shoulders of giants:  master cartographer Tom Patterson ensured that the public-domain map designs created by NPS would be made available to the public. You search up a park, find the map page, and download the "Adobe print production ZIP file." Here's one for [Yosemite National Park](https://www.nps.gov/media/photo/collection-item.htm?pg=7347320&cid=305fb7af-a71b-469b-941e-a98b439c882f&id=c51f64fd-51dc-400e-b562-d02789c95933&sid=1e843023-c4e1-4edb-96be-6444f5fc3468&p=1&sort=), and [here’s a ZIP with a sample NPS map, layout, symbology, the works.](/other_data/NPS_templates.zip)
 
@@ -754,3 +761,9 @@ There’s no building you can walk into where someone will grab you by both ears
 Today’s talented anglophone mapmakers, and there are many, taught themselves. They are the only ones taking this seriously; the autodidacts are my favorite. I just wish you didn’t have to be a five-star autodidact to make nice maps.
 
 If I really had my druthers I'd solve this with ~$15 million, property, and professional instruction: make more mapmakers by apprenticeship. I learned mapmaking by close-range apprenticeship; so, a school with a 1:1 instructor ratio. If you've got the building, I have the staff. Call me.
+
+_"N=1" rules for mapmaking_
+1. You're not smarter than time. No reinventing wheels, you're not that good. If you're a 99th-percentile genius, go get em I can't wait to see your maps :^) for real :^)
+2. Just ask. You see a nice map, you see the mapmaker is alive, and you ask them how it happened. You might have a great conversation and find out.
+3. If a map needs to look nice, divide work in a grid; each grid cell is your atomic unit of work.
+4. Learn about everything else but maps, then use that to make maps. Maps are for the world, not the world for maps.
