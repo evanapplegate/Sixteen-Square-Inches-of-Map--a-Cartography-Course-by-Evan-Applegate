@@ -1,4 +1,10 @@
-<!-- Basic flow: a graphic designer, prospects annihilated by AI, can learn to make nice maps in open source GIS software + adobe. No videos, lots of GIFs. Everything you need is on this HTML page; public domain'd source code in https://github.com/evanapplegate/Sixteen-Square-Inches-of-Map--a-Cartography-Course-by-Evan-Applegate -->
+<!-- Basic flow: a graphic designer, prospects annihilated by AI, can learn to make nice maps in open source GIS software + adobe. No videos, lots of GIFs. Everything you need is on this HTML page; public domain'd source code in https://github.com/evanapplegate/Sixteen-Square-Inches-of-Map--a-Cartography-Course-by-Evan-Applegate 
+
+
+gifsicle --resize-width 760 --optimize=3 --lossy=80 --colors 256 in.gif -o output.gif
+
+
+-->
 
 ![images look like this](/site_images/header.gif)
 _A practical course for those who want to use the computer to make nice maps._
@@ -457,11 +463,11 @@ You fix all of those in a grid cell, tick it off, then move on to the next. "Sim
 ![National Park Service Illustrator file](/course_images/always_steal.gif)
 _A National Park Service Illustrator file; hewing to this will make you an 80th percentile cartographer._
 
-_"Good [mapmakers] copy, great [mapmakers] steal."_ The referent to which the word "map" is stuck = a thousand-year-old cultural artifact that people trust; people are primed to appreciate and enjoy maps because past cartographers did a great job aesthetically.
+_"Good [mapmakers] borrow, great [mapmakers] steal."_ The referent to which the word "map" is stuck = a thousand-year-old cultural artifact that people trust; people are primed to appreciate and enjoy maps because past cartographers did a great job aesthetically.
 
 Unless you're a 99.9th percentile genius, cartographic innovation is not for you. Hew to what better mapmakers did.
 
-Luckily it's never been easier to stand on the shoulders of giants:  master cartographer Tom Patterson ensured that the public-domain map designs created by NPS would be made available to the public. You search up a park, find the map page, and download the "Adobe print production ZIP file." Here's one for [Yosemite National Park](https://www.nps.gov/media/photo/collection-item.htm?pg=7347320&cid=305fb7af-a71b-469b-941e-a98b439c882f&id=c51f64fd-51dc-400e-b562-d02789c95933&sid=1e843023-c4e1-4edb-96be-6444f5fc3468&p=1&sort=), and [here’s a ZIP with a sample NPS map, layout, symbology, the works.](/other_data/NPS_templates.zip)
+Luckily it's never been easier to stand on the shoulders of giants: master cartographer Tom Patterson ensured that the public-domain map designs created by NPS would be made available to the public. Search for a park, find the map page, download the "Adobe print production ZIP file." Here's one for [Yosemite National Park](https://www.nps.gov/media/photo/collection-item.htm?pg=7347320&cid=305fb7af-a71b-469b-941e-a98b439c882f&id=c51f64fd-51dc-400e-b562-d02789c95933&sid=1e843023-c4e1-4edb-96be-6444f5fc3468&p=1&sort=), and [here’s a ZIP with a sample NPS map, layout, symbology, the works.](/other_data/NPS_templates.zip)
 
 ### 3. Always walk
 Maps are about territories; if possible, get out there.
@@ -570,10 +576,15 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 			https://kelsocartography.com/scripts/scripts/nvkelso/findAndReplaceGraphic_centered_v2.jsx
 		- X.1 Lines
 			- Casing roads
+			![images look like this](/course_images/3_casing_roads.gif)
+			Use the Appearance panel to add layer-level strokes underneath your main road strokes. This offsets your roads from the features underneath. So your road lines go on a layer, no stroke/fill on the individual paths, but the entire layer gets two strokes: a thick one on the bottom and a light one on top.
 			- Dotted, dashed lines
 		- X.1 Polygons/shapes/fills
 			- Glows
+			![images look like this](/course_images/3_inner_glows.gif)
 			Polygons with interior faded glows: black fill, feather effect, opacity 0% above ANOTHER fill with the color you like. might need knockout group enabled too
+
+
 			- Coast lines (adjustment panel)
 			Making vintage-style coast lines in Illustrator: to your coastline path add a series of strokes in the appearance panel, each gets an offset path effect. Increase the offset path distance between each stroke so they spread out as they get further from the coast.
 			This is a last step as it makes Illustrator very slow; I save the appearance as a graphic style and apply it when I'm ready to export.
@@ -642,7 +653,11 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 | [Intro to satellite data + GDAL](https://medium.com/%40robsimmon/making-sense-of-satellite-data-an-open-source-workflow-accessing-data-8f7f3c30f151) | [Common satellite data + GDAL operations](https://github.com/timwallace/nicar20-imagery-with-bash) |
 | [Google Earth Engine end-to-end tutorial](https://courses.spatialthoughts.com/end-to-end-gee.html) | [Generate a DEM from LIDAR](https://dominoc925.blogspot.com/2017/07/use-pdal-to-generate-dem-from-lidar-las.html) |
 | [Rob Simmons’ GDAL tutorials](https://medium.com/planet-stories/a-gentle-introduction-to-gdal-part-1-a3253eb96082) | [Map School](https://mapschool.io/) |
-| [Change projections in QGIS](https://www.youtube.com/watch?v=6HkMxDijgbs) | |
+| [Change projections in QGIS](https://www.youtube.com/watch?v=6HkMxDijgbs) | [Command line cartography with JavaScript](https://medium.com/@mbostock/command-line-cartography-part-1-897aa8f8ca2c) |
+| [Smooth contours with GDAL/QGIS](https://hkartor.se/anteckningar/contour_lines_script.html) | [Making maps with D3 and JavaScript]([)https://github.com/uwcartlab/webmapping/tree/master/Chapter09) |
+
+
+
 
 |   Map design    |     |
 |:--------------------------|:--------------------------|
@@ -703,8 +718,6 @@ Now you’re in the art zone: compositing in Illustrator, labeling, futzing with
 
 # Read me last <a id="read-me-last"></a>
 
-The most beautiful maps are not behind us: they will be made today, by people who cared enough to make them. That sounds like you.
-
 Luckily great cartography requires no formal training or credentials. I learned by trial and so will you.
 
 The best contemporary mapmakers taught themselves: [Eleanor Lutz](https://eleanorlutz.com/animated-seasons-of-arctic-ice) is a bio PhD and learned cartography on her own. Illustrator [Mike Hall](https://www.thisismikehall.com/) sketched maps in his notebook during shifts as a security guard, and now has an agent to handle his map deals. [Alex McPhee](https://pronghornmaps.com/) studied geophysics, decided he needed to map his native Alberta, got some open source geo-software and made a few of the best modern reference maps.
@@ -763,7 +776,7 @@ Today’s talented anglophone mapmakers, and there are many, taught themselves. 
 If I really had my druthers I'd solve this with ~$15 million, property, and professional instruction: make more mapmakers by apprenticeship. I learned mapmaking by close-range apprenticeship; so, a school with a 1:1 instructor ratio. If you've got the building, I have the staff. Call me.
 
 _"N=1" rules for mapmaking_
-1. You're not smarter than time. No reinventing wheels, you're not that good. If you're a 99th-percentile genius, go get em I can't wait to see your maps :^) for real :^)
+1. You're not smarter than time. No reinventing wheels, you're not that good. If you're a 99th-percentile genius, sure go nuts I can't wait to see your maps :^)
 2. Just ask. You see a nice map, you see the mapmaker is alive, and you ask them how it happened. You might have a great conversation and find out.
 3. If a map needs to look nice, divide work in a grid; each grid cell is your atomic unit of work.
 4. Learn about everything else but maps, then use that to make maps. Maps are for the world, not the world for maps.
