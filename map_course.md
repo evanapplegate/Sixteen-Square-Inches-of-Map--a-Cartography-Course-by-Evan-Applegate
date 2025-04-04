@@ -3,12 +3,11 @@
 
 gifsicle --resize-width 760 --optimize=3 --lossy=80 --colors 256 in.gif -o output.gif
 
-
 -->
 
 ![images look like this](/site_images/header.gif)
 _A practical course for those who want to use the computer to make nice maps._
-_This is a work in progress; submit comments [via LinkedIn](https://www.linkedin.com/in/evan-applegate/) or info@quercusmaps.com_
+_This is a work in progress; submit comments [via LinkedIn](https://www.linkedin.com/in/evan-applegate/), [Twitter](https://twitter.com/youwillmakemaps) or info@quercusmaps.com._
 
 - [Resources](#resources)
 - [Read me first](#read-me-first)
